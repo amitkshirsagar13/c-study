@@ -15,8 +15,11 @@ int main() {
     // delete item;
 
     float d, b;
+    cout << "Enter Dimension 1: ";
     cin >> d;
+    cout << "Enter Dimension 2: ";
     cin >> b;
+
     Shape* shape = new Circle(d);
     shape->area();
     shape->print();
