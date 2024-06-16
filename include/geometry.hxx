@@ -5,14 +5,35 @@
 #include <iostream>
 #include <string>
 #include <iomanip>
+#include <vector>
+#include <memory>
 
 #ifndef DEF_PI
 #define DEF_PI
 #define PI 3.14159265359;
 #endif
 
+using namespace std;
+
+using SharedShapePtr = shared_ptr<GEOMETRY::Shape>;
 
 namespace GEOMETRY {
+    class ShapeManager {
+        public:
+            static ShapeManager *getInstance();
+            ShapeManager(const ShapeManager& obj) = delete;
+            void operator=(ShapeManager const&)  = delete;
+            void addShape(SharedShapePtr shapePtr);
+            void editShape(size_t index, SharedShapePtr shapePtr);
+            Shape *getShapeByIndex(size_t index);
+            void deleteShape(size_t index);
+            void area();
+        private:
+            ShapeManager();
+            static ShapeManager *instance;
+            std::vector<SharedShapePtr> shapeList;
+
+    };
     class Shape {
         public:
             Shape();

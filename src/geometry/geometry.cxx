@@ -3,6 +3,46 @@
 #include "geometry.hxx"
 
 namespace GEOMETRY {
+    ShapeManager::ShapeManager(){}
+    ShapeManager* ShapeManager::getInstance() {
+        if (instance == nullptr) {
+            instance = new ShapeManager();
+        }
+
+        return instance;
+    }
+    void ShapeManager::addShape(SharedShapePtr shapePtr){
+        shapeList.push_back(shapePtr);
+    };
+    void ShapeManager::editShape(size_t index, SharedShapePtr newShape){
+        if (index < shapeList.size()) {
+            shapeList[index] = newShape;
+        } else {
+            std::cerr << "Index out of range.\n";
+        }
+    };
+    Shape* ShapeManager::getShapeByIndex(size_t index){
+        if (index < shapeList.size()) {
+            return shapeList[index];
+        } else {
+            std::cerr << "Index out of range.\n";
+        }
+
+        return nullptr;
+    };
+    void ShapeManager::deleteShape(size_t index){
+        if (index < shapeList.size()) {
+            shapeList.erase(shapeList.begin() + index);
+        } else {
+            std::cerr << "Index out of range.\n";
+        }
+    };
+    void ShapeManager::area(){
+        for (const auto& shape : shapeList) {
+            shape->area();
+        }
+    };
+
     Shape::Shape(){
         this->areaValue = 0;
     };

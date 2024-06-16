@@ -8,6 +8,8 @@ using namespace HOTEL::MENU;
 
 int main() {
 
+    ShapeManager *shapeManager = ShapeManager::getInstance();
+
     // Item* item = createMenuItem();
     // item->print();
     // item->edit();
